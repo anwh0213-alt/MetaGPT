@@ -10,6 +10,9 @@ processing to provide informative answers to user queries.
 import asyncio
 
 from metagpt.actions.search_enhanced_qa import SearchEnhancedQA
+import os
+os.environ['HTTP_PROXY'] = 'http://172.23.80.1:7890'
+os.environ['HTTPS_PROXY'] = 'http://172.23.80.1:7890'
 
 
 async def main():
@@ -23,5 +26,17 @@ async def main():
     print(f"The answer to '{query}' is:\n\n{answer}")
 
 
+async def test_ddg():
+    import requests
+    try:
+        response = requests.get("https://duckduckgo.com", timeout=10)
+        print(f"连接成功: {response.status_code}")
+    except Exception as e:
+        print(f"连接失败: {e}")
+
+
+
 if __name__ == "__main__":
+    asyncio.run(test_ddg())
     asyncio.run(main())
+    

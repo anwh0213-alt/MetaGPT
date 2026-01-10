@@ -27,7 +27,7 @@ class DDGAPIWrapper(BaseModel):
 
     @property
     def ddgs(self):
-        return DDGS(proxies=self.proxy)
+        return DDGS(proxies=self.proxy, timeout=30)
 
     @overload
     def run(
